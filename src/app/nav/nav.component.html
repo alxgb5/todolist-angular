@@ -1,13 +1,64 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">TodoList</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#">TodoList</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse float-right navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" routerLink="/home">Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link active" routerLink="/create">Ajout Cards</a>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+        Ajout Cards
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ajouter une nouvelle card :</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <div class="mt-4">
+                  <div class="form-group">
+                    <label for="titleTask">Nom de la tâche :</label>
+                    <input type="text" [formControl]="titleControl" class="form-control" id="titleTask" name="title"
+                      placeholder="Nom de la tâche">
+                    <div *ngIf="titleControl.invalid && (titleControl.dirty || titleControl.touched)"
+                      class="alert alert-danger mt-2">
+                      <div *ngIf="titleControl.hasError('required')">
+                        Le champ est obligatoire.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="descpTask">Description la tâche :</label>
+                    <textarea [formControl]="descriptionControl" class="form-control" id="descpTask" name="description"
+                      placeholder="Description"></textarea>
+                    <div *ngIf="descriptionControl.invalid && (descriptionControl.dirty || descriptionControl.touched)"
+                      class="alert alert-danger mt-2">
+                      <div *ngIf="descriptionControl.hasError('required')">
+                        Le champ est obligatoire.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn float-right btn-primary">Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </nav>
-  
+</nav>

@@ -4,13 +4,15 @@ import { CreateTaskComponent } from './create-task/create-task.component'
 import { HomeComponent } from './home/home.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { EditFeatureComponent } from './edit-feature/edit-feature.component';
+import { SimpleFormComponentComponent  } from './simple-form-component/simple-form-component.component';
 
 const routes: Routes = [
   { path: 'create', component: CreateTaskComponent},
   { path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'edit', component: EditTaskComponent},
-  { path: 'feature', component: EditFeatureComponent}
+  { path: 'feature', component: EditFeatureComponent},
+  {path: 'test', component: SimpleFormComponentComponent }
 ];
 
 @NgModule({

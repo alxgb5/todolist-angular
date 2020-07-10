@@ -1,0 +1,23 @@
+<form>
+    <div class="form-group">
+        <label for="taskTitle">Tâche :</label>
+        <input type="text" class="form-control" placeholder="Nom de la tâche en cours" [formControl]="titleControl">
+        <div *ngIf="titleControl.invalid && (titleControl.dirty || titleControl.touched)" class="alert alert-danger">
+            <div *ngIf="titleControl.hasError('required')">
+                Le champ est obligatoire.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="taskDescription">Description la tâche :</label>
+        <textarea class="form-control" [formControl]="descriptionControl" name="description"
+            placeholder="Description">taskDescription</textarea>
+            <div *ngIf="descriptionControl.invalid && (descriptionControl.dirty || descriptionControl.touched)"
+                class="alert alert-danger">
+                <div *ngIf="descriptionControl.hasError('required')">
+                    Le champ est obligatoire.
+                </div>
+            </div>
+    </div>
+</form>
+<button (click)='test()' type="submit"></button>
