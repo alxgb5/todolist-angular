@@ -1,6 +1,6 @@
 <div class="row mt-3">
     <div class="col-md-4 mt-2" *ngFor="let task of tasks">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-body left-card">
                 <button type="button" class="btn btn-warning float-right btn-sm" data-toggle="modal"
                     [attr.data-target]="'#modal-'+task.id">
@@ -30,8 +30,8 @@
                                         <div class="form-group">
                                             <label for="{{ task.title }}">Tâche :</label>
                                             <input type="text" [formControl]="titleControl" class="form-control"
-                                                id="{{ task.title }}" name="title"
-                                                placeholder="Nom de la tâche en cours" value="{{ task.title }}">
+                                                id="{{ task.title }}-{{ task.id }}" name="title"
+                                                placeholder="Nom de la tâche en cours">
                                             <div *ngIf="titleControl.invalid && (titleControl.dirty || titleControl.touched)"
                                                 class="alert alert-danger mt-2">
                                                 <div *ngIf="titleControl.hasError('required')">
@@ -73,13 +73,13 @@
             <ul class="list-group list-group-flush" *ngFor="let feature of task.features">
                 <li class="list-group-item">
                     <div id="tache" class="custom-control custom-checkbox">
-                        <input type="checkbox" name="taskID" class="custom-control-input" checked id="featureID">
-                        <label class="custom-control-label" for="featureID">{{feature.name}}</label>
+                        <input type="checkbox" name="{{ task.id }}" class="custom-control-input" checked id="{{ feature.id }}">
+                        <label class="custom-control-label" for="{{feature.id}}">{{feature.name}}</label>
                         <!-- <input type="checkbox" onClick="window.location.reload();" name="{{ $task->id }}" class="custom-control-input" id="{{ $feature->id }}">
                             <label class="custom-control-label" for="{{ $feature->id }}">{{ $feature->name }}</label> -->
                         <div class="float-right">
                             <form>
-                                <button class="btn btn-danger btn-sm">
+                                <button type="submit" (click)="featureDelete(feature.id)" class="btn btn-danger btn-sm">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -116,16 +116,15 @@
                                             <div class="mt-5">
                                                 <div class="form-group">
                                                     <label for="{{ feature.name}}">Feature :</label>
-                                                    <input type="text" class="form-control" id="{{ task.title }}"
-                                                        name="title" placeholder="Nom de la tâche en cours"
-                                                        value="{{ feature.name }}">
+                                                    <input type="text" [formControl]="editControl" class="form-control" id="feature-{{ feature.name }}"
+                                                        name="title" placeholder="Nom de la tâche en cours" value="{{ feature.name }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn float-right btn-warning">Enregistrer
+                                            <button type="submit" (click)="featureUpdate()" class="btn float-right btn-warning">Enregistrer
                                                 modifications</button>
                                         </div>
                                     </div>
@@ -136,10 +135,18 @@
                 </li>
             </ul>
             <form>
-                <div class="form-group ml-2 mr-2 border-top">
+                <div class="form-group ml-2 mb-2 mr-2 border-top">
                     <label class="mt-2" for="titleTask">Nom de la tâche :</label>
-                    <input type="text" class="form-control" id="name_feature" name="name" placeholder="Nom de la tâche">
-                    <input type="hidden" name="task" value="taskID">
+                    <input type="text" [formControl]="nameControl" class="float-left mb-2 form-control w-75" id="name_feature{{task.id}}" name="name"
+                        placeholder="Nom de la tâche">
+                    <input type="hidden" [formControl]="taskControl" name="task" value="{{task.id}}">
+                    <button type="submit" (click)="featureCreate(task)" class="float-right btn btn-success btn-sm">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </button>
                 </div>
             </form>
         </div>

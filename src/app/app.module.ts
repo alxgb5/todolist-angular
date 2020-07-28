@@ -14,7 +14,6 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
 import { EditFeatureComponent } from './edit-feature/edit-feature.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SimpleFormComponentComponent } from './simple-form-component/simple-form-component.component';
 
 
 @NgModule({
@@ -25,13 +24,13 @@ import { SimpleFormComponentComponent } from './simple-form-component/simple-for
     CreateTaskComponent,
     HomeComponent,
     EditTaskComponent,
-    EditFeatureComponent,
-    SimpleFormComponentComponent
+    EditFeatureComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,
